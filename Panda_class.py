@@ -6,7 +6,7 @@ class Panda:
     def __init__(self, name, email, gender):
         self._name = name
         self._email = email
-        if not self.is_mail_valid():
+        if not self._is_mail_valid():
             raise Exception('Invalid mail !')
         self._gender = gender
 
@@ -32,7 +32,7 @@ class Panda:
 
     def __str__(self):
         return 'Name>{}, Mail>{}, Gender>{}'.format(
-                self.name, self.email, self.gender)
+                self.get_name(), self.get_email(), self.get_gender())
 
     def __repr__(self):
         return str(self)
