@@ -31,7 +31,7 @@ class Panda:
         return False
 
     def __str__(self):
-        return 'Name>{}, Mail>{}, Gender>{}'.format(
+        return '{} - {} - {}'.format(
                 self.get_name(), self.get_email(), self.get_gender())
 
     def __repr__(self):
