@@ -32,7 +32,7 @@ class Panda:
 
     def __str__(self):
         return 'Name>{}, Mail>{}, Gender>{}'.format(
-                self.name, self.email, self.gender)
+                self.get_name(), self.get_email(), self.get_gender())
 
     def __repr__(self):
         return str(self)
