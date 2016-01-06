@@ -25,7 +25,7 @@ class Panda:
     def isFemale(self):
         return not self.isMale()
 
-    def is_mail_valid(self):
+    def _is_mail_valid(self):
         if re.match(r"[^@]+@[^@]+\.[^@]+", self.get_email()):
             return True
         return False
