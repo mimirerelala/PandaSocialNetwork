@@ -6,7 +6,7 @@ class Panda:
     def __init__(self, name, email, gender):
         self._name = name
         self._email = email
-        if not self.is_mail_valid():
+        if not self._is_mail_valid():
             raise Exception('Invalid mail !')
         self._gender = gender
 
