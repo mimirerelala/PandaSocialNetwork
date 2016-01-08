@@ -2,18 +2,23 @@ class PandaSocialNetwork:
     def __init__(self):
         self.__pandas = {}
 
-    def add_panda(self, panda):
-        self.__pandas[panda] = []
-
     def has_panda(self, panda):
         if panda in self.__pandas:
             return True
         return False
 
+    def add_panda(self, panda):
+        if not self.has_panda(panda):
+            self.__pandas[panda] = []
+
     def make_friends(self, panda1, panda2):
-        self.__pandas[panda1].append(panda2)
-        self.__pandas[panda2].append(panda1)
-        return
+        if not self.has_panda(panda1):
+            self.add_panda(panda1)
+        if not self.has_panda(panda2):
+            self.add_panda(panda2)
+        if panda1 != panda2:
+            self.__pandas[panda1].append(panda2)
+            self.__pandas[panda2].append(panda1)
 
     def are_friends(self, panda1, panda2):
         if self.has_panda(panda1) and self.has_panda(panda2):
