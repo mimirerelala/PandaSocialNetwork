@@ -2,7 +2,6 @@ import unittest
 from Panda_class import Panda
 from PandaSocialNetwork import PandaSocialNetwork
 
-
 class TestSocialNetwork(unittest.TestCase):
     def setUp(self):
         self.ivo = Panda("Ivo", "ivo@pandamail.bg", "male")
@@ -22,7 +21,7 @@ class TestSocialNetwork(unittest.TestCase):
         self.assertTrue(self.network.are_friends(self.ivo, rado))
 
     def test_connection_level(self):
-        m=1
+        pass
         
 if __name__ == "__main__":
     unittest.main()

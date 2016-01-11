@@ -1,13 +1,15 @@
 from collections import deque
 from Panda_class import Panda
-
+import pickle
 
 class PandaSocialNetwork:
     def __init__(self):
         self.__pandas = {}
 
     def add_panda(self, panda):
-        if not self.has_panda(panda):
+        if self.has_panda(panda):
+            raise PandaAlreadyThereError(panda + "is already added to the network")
+        else:
             self.__pandas[panda] = []
 
     def has_panda(self, panda):
@@ -21,6 +23,8 @@ class PandaSocialNetwork:
         if not self.are_friends(panda1, panda2):
             self.__pandas[panda1].append(panda2)
             self.__pandas[panda2].append(panda1)
+        else:
+            raise PandasAlreadyFriendsError("%s and %s are already friends!".format(panda1.get_name(), panda2.get_name()))
 
     def are_friends(self, panda1, panda2):
         if self.has_panda(panda1) and self.has_panda(panda2):
@@ -29,7 +33,10 @@ class PandaSocialNetwork:
         return False
 
     def friends_of(self, panda):
-        return self.__pandas[panda]
+        if self.has_panda(panda):
+            return self.__pandas[panda]
+        else:
+            return False
 
     def _bfs_with_level(self, start_node, end_node):
         visited = set()
@@ -97,3 +104,29 @@ class PandaSocialNetwork:
     def how_many_gender_in_network(self, level, panda, gender):
 
         return self._bfs_gender_counter(level, panda, gender)
+
+    def save(self, filename):
+        file_object = open(filename,'wb') 
+        pickle.dump(self.__pandas,file_object)   
+        file_object.close()
+
+    def load(self, filename):
+        file_object = open(filename,'r')  
+        self.__pandas = pickle.load(file_object)
+        file_object.close()
+
+
+class PandaAlreadyThereError(Exception):
+    def __init__(self, value):
+        self.value = value
+
+    def __str__(self):
+        return repr(self.value)
+
+
+class PandasAlreadyFriendsError(Exception):
+    def __init__(self, value):
+        self.value = value
+
+    def __str__(self):
+        return repr(self.value)

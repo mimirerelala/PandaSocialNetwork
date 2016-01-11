@@ -19,8 +19,8 @@ tony = Panda("Tony", "tony@pandamail.com", "female")
 for panda in [ivo, rado, tony]:
     network.add_panda(panda)
 
-network.make_friends(ivo, rado)
-network.make_friends(rado, tony)
+#network.make_friends(ivo, rado)
+#network.make_friends(rado, tony)
 
 network.connection_level(ivo, rado) == 1 # True
 network.connection_level(ivo, tony) == 2 # True

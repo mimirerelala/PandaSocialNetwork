@@ -57,5 +57,18 @@ class TestSocialNetwork(unittest.TestCase):
 
         self.assertEqual(self.network.how_many_gender_in_network(3, maria, 'male'),3)
 
+    def test_save_and_load(self):
+        self.network.add_panda(self.ivo)
+        niki = Panda("Niki", "niki@mail.com", 'male')
+        self.network.add_panda(niki)
+        self.network.make_friends(self.ivo, niki)
+        self.network.save("unit_test_save_file_cache")
+        new_network = PandaSocialNetwork()
+        self.assertFalse(new_network.has_panda(self.ivo))
+        new_network.load("unit_test_save_file_cache")
+        self.assertTrue(new_network.has_panda(self.ivo))
+        self.assertTrue(new_network.has_panda(niki))
+        self.assertTrue(new_network.are_friends(self.ivo, niki))
+
 if __name__ == "__main__":
     unittest.main()
