@@ -4,6 +4,7 @@ from PandaSocialNetwork import PandaSocialNetwork
 
 
 class TestSocialNetwork(unittest.TestCase):
+
     def setUp(self):
         self.ivo = Panda("Ivo", "ivo@pandamail.bg", "male")
         self.network = PandaSocialNetwork()
@@ -31,13 +32,9 @@ class TestSocialNetwork(unittest.TestCase):
         self.network.make_friends(self.ivo, rado)
         self.assertTrue(self.network.are_connected(self.ivo, rado))
         mimi = Panda("Mimi", "mimi@pandamail.bg", "female")
-
-        self.assertFalse(self.network.are_connected(self.ivo, mimi)
-      
+        self.assertFalse(self.network.are_connected(self.ivo, mimi))
         self.network.make_friends(rado, mimi)
         self.assertTrue(self.network.are_connected(mimi, rado))
-
-
 
     def test_genders_in_level(self):
 
@@ -46,19 +43,19 @@ class TestSocialNetwork(unittest.TestCase):
         maria = Panda("maria", "maria@pandamail.com", "female")
         ivo = Panda("Ivo", "ivo@pandamail.bg", "male")
         niki = Panda("Niki", "niki@mail.com", 'male')
-        pan = Panda("Pan", 'pan@mail.com', 'male')
  
-        network.add_panda(rado)
-        network.add_panda(pavli)
-        network.add_panda(maria)
-        network.add_panda(ivo)
-        network.add_panda(niki)
+        self.network.add_panda(rado)
+        self.network.add_panda(pavli)
+        self.network.add_panda(maria)
+        self.network.add_panda(ivo)
+        self.network.add_panda(niki)
  
-        network.make_friends(ivo, rado)
-        network.make_friends(rado, pavli)
-        network.make_friends(pavli, maria)
-        network.make_friends(rado, niki)
+        self.network.make_friends(ivo, rado)
+        self.network.make_friends(rado, pavli)
+        self.network.make_friends(pavli, maria)
+        self.network.make_friends(rado, niki)
 
-        self.assertEqual(network.how_many_gender_in_network(3, maria, 'male'),3)
+        self.assertEqual(self.network.how_many_gender_in_network(3, maria, 'male'),3)
+
 if __name__ == "__main__":
     unittest.main()

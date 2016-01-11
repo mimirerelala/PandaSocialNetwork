@@ -1,22 +1,26 @@
 from collections import deque
 from Panda_class import Panda
 
+
 class PandaSocialNetwork:
     def __init__(self):
         self.__pandas = {}
 
     def add_panda(self, panda):
-        self.__pandas[panda] = []
+        if not self.has_panda(panda):
+            self.__pandas[panda] = []
 
     def has_panda(self, panda):
-        if panda in self.__pandas:
-            return True
-        return False
+        return panda in self.__pandas
 
     def make_friends(self, panda1, panda2):
-        self.__pandas[panda1].append(panda2)
-        self.__pandas[panda2].append(panda1)
-        return
+        if not self.has_panda(panda1):
+            self.add_panda(panda1)
+        if not self.has_panda(panda2):
+            self.add_panda(panda2)
+        if not self.are_friends(panda1, panda2):
+            self.__pandas[panda1].append(panda2)
+            self.__pandas[panda2].append(panda1)
 
     def are_friends(self, panda1, panda2):
         if self.has_panda(panda1) and self.has_panda(panda2):
@@ -93,30 +97,3 @@ class PandaSocialNetwork:
     def how_many_gender_in_network(self, level, panda, gender):
 
         return self._bfs_gender_counter(level, panda, gender)
-
-
-def main():
-        rado = Panda("Rado", "rado@pandamail.com", "male")
-        pavli = Panda("Pavli", "pavlin@pandamail.com", "female")
-        maria = Panda("maria", "maria@pandamail.com", "female")
-        ivo = Panda("Ivo", "ivo@pandamail.bg", "male")
-        niki = Panda("Niki", "niki@mail.com", 'male')
-        pan = Panda("Pan", 'pan@mail.com', 'male')
-
-        network = PandaSocialNetwork()
-        network.add_panda(rado)
-        network.add_panda(pavli)
-        network.add_panda(maria)
-        network.add_panda(ivo)
-        network.add_panda(niki)
-
-        network.make_friends(ivo, rado)
-        network.make_friends(rado, pavli)
-        network.make_friends(pavli, maria)
-        network.make_friends(rado, niki)
-
-        print network.how_many_gender_in_network(3, maria, 'male')
-
-
-if __name__ == '__main__':
-    main()
